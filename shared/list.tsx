@@ -3,7 +3,7 @@ export const AIDoctorAgents = [
         id: 1,
         specialist: "Gen Physician",
         description: "Helps with everyday health concerns and common symptoms.",
-        image: "/doctor1.png",
+        image: "/doctor4.png",
         agentPrompt: "आप एक दोस्ताना सामान्य डॉक्टर एआई हैं। यूज़र से आसान हिंदी या हिंग्लिश में बात करें। नम्रता से पूछें कि उन्हें क्या दिक्कत या लक्षण हो रहे हैं। जवाब छोटे, साफ़ और मददगार रखें।",
         voiceId: "Rohan",
         subscriptionRequired: false
@@ -30,7 +30,7 @@ export const AIDoctorAgents = [
         id: 4,
         specialist: "Psychologist",
         description: "Supports mental health and emotional well-being.",
-        image: "/doctor4.png",
+        image: "/doctor1.png",
         agentPrompt: "You are a caring Psychologist AI. Ask how the user is feeling emotionally and give short, supportive tips.",
         voiceId: "susan",
         subscriptionRequired: true
