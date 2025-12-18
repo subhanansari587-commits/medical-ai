@@ -4,38 +4,80 @@ import { SessionChatTable } from "@/config/schema";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
-const REPORT_GEN_PROMPT = `You are an AI Medical Voice Agent that just finished a voice conversation with a user. Based  on doctor AI agent info and Conversation between AI medical agent and user, generate a structured report with the following fields:
-2. agent: the medical specialist name (e.g., "General Physician AI")
-3. user: name of the patient or "Anonymous" if not provided
-4. timestamp: current date and time in ISO format
-5. chiefComplaint: one-sentence summary of the main health concern
-6. summary: a 2-3 sentence summary of the conversation, symptoms, and recommendations
-7. symptoms: list of symptoms mentioned by the user
-8. duration: how long the user has experienced the symptoms
-9. severity: mild, moderate, or severe
-10. medicationsMentioned: list of any medicines mentioned
-11. recommendations: list of AI suggestions (e.g., rest, see a doctor)
-Return the result in this JSON format:
+const REPORT_GEN_PROMPT = `
+You are an AI Medical Trainer that has just completed a voice-based training / interview session with a user.
+
+The AI agent was NOT diagnosing or prescribing treatment.
+The goal of the conversation was to TRAIN and ASSESS the user's understanding of a medical topic mentioned in the session notes.
+
+Based on:
+1) AI trainer agent info
+2) The full conversation between the AI trainer and the user
+
+Generate a structured TRAINING REPORT with the following fields:
+
+1. agent:
+   Name or role of the AI trainer (e.g., "General Physician Trainer AI")
+
+2. user:
+   Name of the trainee or "Anonymous" if not provided
+
+3. timestamp:
+   Current date and time in ISO format
+
+4. trainingTopic:
+   The medical condition or topic the user was trained on (e.g., Fever, Headache)
+
+5. interviewSummary:
+   2–3 sentence summary of how the training went, including what was asked and how the user responded overall
+
+6. questionsAsked:
+   List of key questions asked by the AI trainer during the session
+
+7. userResponses:
+   Brief summary of the user’s answers (not verbatim, summarize understanding)
+
+8. correctConcepts:
+   List of medical concepts the user answered correctly or partially correctly
+
+9. incorrectOrMissingConcepts:
+   List of concepts the user struggled with, answered incorrectly, or could not answer
+
+10. trainerFeedback:
+    Constructive feedback given by the AI trainer to help the user improve
+
+11. overallAssessment:
+    One of: "Beginner", "Intermediate", or "Needs Improvement"
+
+Return the result strictly in the following JSON format:
+
 {
- "agent": "string",
- "user": "string",
- "timestamp": "ISO Date string",
- "chiefComplaint": "string",
- "summary": "string",
- "symptoms": ["symptom1", "symptom2"],
- "duration": "string",
- "severity": "string",
- "medicationsMentioned": ["med1", "med2"],
- "recommendations": ["rec1", "rec2"],
+  "agent": "string",
+  "user": "string",
+  "timestamp": "ISO Date string",
+  "trainingTopic": "string",
+  "interviewSummary": "string",
+  "questionsAsked": ["question1", "question2"],
+  "userResponses": "string",
+  "correctConcepts": ["concept1", "concept2"],
+  "incorrectOrMissingConcepts": ["concept1", "concept2"],
+  "trainerFeedback": "string",
+  "overallAssessment": "string"
 }
-Only include valid fields. Respond with nothing else.
-`
+
+Rules:
+- Do NOT include medications, prescriptions, or prevention advice.
+- Do NOT act like a medical consultation report.
+- This is a learning and evaluation report, not a treatment plan.
+- Respond with ONLY valid JSON. No extra text.
+`;
+
 
 export async function POST(req: NextRequest) {
     const { sessionId, sessionDetail, messages } = await req.json();
 
     try {
-        const UserInput = "AI Doctor Agent Info:" + JSON.stringify(sessionDetail) + ", Conversation:" + JSON.stringify(messages);
+        const UserInput = "AI Medical Trainer Agent Info:" + JSON.stringify(sessionDetail) + ", Conversation:" + JSON.stringify(messages);
         const completion = await openai.chat.completions.create({
             model: "google/gemini-2.5-flash",
             messages: [
