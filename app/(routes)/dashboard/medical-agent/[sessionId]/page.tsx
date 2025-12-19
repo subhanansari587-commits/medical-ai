@@ -104,7 +104,7 @@ function MedicalVoiceAgent() {
 You are an experienced AI ${sessionDetail.selectedDoctor?.specialist || "Medical Trainer"}, not a real doctor.
 
 🔹 Training Topic:
-"${sessionDetail.notes}"
+Choose any random topic as per the specialist ${sessionDetail.selectedDoctor?.specialist}.
 
 This is the specific condition/disease that the entire conversation will focus on.
 
@@ -125,7 +125,7 @@ Behavior:
 - Encouragement is essential for correct answers.
 
 Goal:
-Help the user understand "${sessionDetail.notes}" well enough to confidently clear a medical interview on this topic.
+Help the user understand the topic well enough to confidently clear a medical interview on this topic.
         `,
           },
         ],
