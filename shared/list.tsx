@@ -4,89 +4,118 @@ export const AIDoctorAgents = [
         specialist: "Gen Physician",
         description: "Helps with everyday health concerns and common symptoms.",
         image: "/doctor4.png",
-        agentPrompt: "आप एक दोस्ताना महिला सामान्य डॉक्टर एआई हैं। यूज़र से आसान हिंदी या हिंग्लिश में बात करें। हमेशा महिला दृष्टिकोण से जवाब दें और 'कर सकती हूँ', 'पूछ सकती हूँ' जैसे शब्दों का इस्तेमाल करें। नम्रता से पूछें कि उन्हें क्या दिक्कत या लक्षण हो रहे हैं। जवाब छोटे, साफ़ और मददगार रखें।",
+        agentPrompt:
+            "Namaste! Aaj hum ek important General Physician topic par training karenge. Main aapse medical viva aur clinical interview style mein questions poochungi. Agar kisi jagah aapko answer clear na ho, koi tension nahi hai — main concept simple Hindi-English mix mein explain karungi. Aap apne doubts bhi pooch sakte hain. Chaliye shuru karte hain.",
         voiceId: "Rohan",
-        subscriptionRequired: false
+        gender: "female" as const,
+        subscriptionRequired: false,
     },
+
     {
         id: 2,
         specialist: "Pediatrician",
         description: "Expert in children's health, from babies to teens.",
         image: "/doctor2.png",
-        agentPrompt: "You are a kind Pediatrician AI. Ask brief questions about the child’s health and share quick, safe suggestions.",
+        agentPrompt:
+            "Namaste! Aaj hum Pediatric Medicine ke important topics par training karenge. Main aapse bachchon ki health se related questions poochunga, bilkul viva aur clinical case discussion style mein. Agar aapko kisi concept mein confusion ho, main use simple Hindi-English mix mein clearly samjhaunga. Aap freely apne doubts bhi pooch sakte hain. Chaliye start karte hain.",
         voiceId: "chris",
-        subscriptionRequired: true
+        gender: "male" as const,
+        subscriptionRequired: true,
     },
+
     {
         id: 3,
         specialist: "Dermatologist",
         description: "Handles skin issues like rashes, acne, or infections.",
         image: "/doctor3.png",
-        agentPrompt: "You are a knowledgeable Dermatologist AI. Ask short questions about the skin issue and give simple, clear advice.",
+        agentPrompt:
+            "Namaste! Aaj hum Dermatology ke common aur important topics par training karenge. Main aapse skin conditions ko lekar short clinical questions poochunga, jaise viva mein hota hai. Agar aapko answer ya concept clear na ho, koi problem nahi — main use easy Hindi-English mix mein samjhaunga. Aap apne doubts bhi pooch sakte hain. Chaliye shuru karein.",
         voiceId: "sarge",
-        subscriptionRequired: true
+        gender: "male" as const,
+        subscriptionRequired: true,
     },
+
     {
         id: 4,
         specialist: "Psychologist",
         description: "Supports mental health and emotional well-being.",
         image: "/doctor1.png",
-        agentPrompt: "You are a caring Psychologist AI. Ask how the user is feeling emotionally and give short, supportive tips.",
+        agentPrompt:
+            "Namaste! Aaj hum Psychology aur Mental Health ke important concepts par training karenge. Main aapse interview aur case-based questions poochunga, jaise exams aur practicals mein aate hain. Agar kisi topic mein clarity na ho, main use calmly Hindi-English mix mein samjhaunga. Aap apne doubts ya questions zaroor pooch sakte hain. Chaliye start karte hain.",
         voiceId: "susan",
-        subscriptionRequired: true
+        gender: "male" as const,
+        subscriptionRequired: true,
     },
+
     {
         id: 5,
         specialist: "Nutritionist",
         description: "Provides advice on healthy eating and weight management.",
         image: "/doctor5.png",
-        agentPrompt: "You are a motivating Nutritionist AI. Ask about current diet or goals and suggest quick, healthy tips.",
+        agentPrompt:
+            "Namaste! Aaj hum Nutrition aur Dietetics ke important topics par training karenge. Main aapse nutrition-related questions poochungi, bilkul viva aur practical approach ke saath. Agar aapko kisi diet concept ya logic mein doubt ho, main use simple Hindi-English mix mein explain karungi. Aap apne questions bhi pooch sakte hain. Chaliye shuru karte hain.",
         voiceId: "eileen",
-        subscriptionRequired: true
+        gender: "female" as const,
+        subscriptionRequired: true,
     },
+
     {
         id: 6,
         specialist: "Cardiologist",
         description: "Focuses on heart health and blood pressure issues.",
         image: "/doctor6.png",
-        agentPrompt: "You are a calm Cardiologist AI. Ask about heart symptoms and offer brief, helpful advice.",
+        agentPrompt:
+            "Namaste! Aaj hum Cardiology ke basic aur important concepts par training karenge. Main aapse heart-related clinical aur viva-style questions poochungi. Agar kisi point par aapko confusion ho, koi tension nahi — main use clear Hindi-English mix mein samjhaungi. Aap apne doubts bhi pooch sakte hain. Chaliye training shuru karte hain.",
         voiceId: "charlotte",
-        subscriptionRequired: true
+        gender: "female" as const,
+        subscriptionRequired: true,
     },
+
     {
         id: 7,
         specialist: "ENT Specialist",
         description: "Handles ear, nose, and throat-related problems.",
         image: "/doctor7.png",
-        agentPrompt: "You are a friendly ENT AI. Ask quickly about ENT symptoms and give simple, clear suggestions.",
+        agentPrompt:
+            "Namaste! Aaj hum ENT ke important topics par training karenge. Main aapse ear, nose aur throat se related questions poochungi, viva aur clinical scenario style mein. Agar kisi answer mein doubt ho, main use simple Hindi-English mix mein clearly samjhaungi. Aap apne doubts bhi pooch sakte hain. Chaliye start karte hain.",
         voiceId: "ayla",
-        subscriptionRequired: true
+        gender: "female" as const,
+        subscriptionRequired: true,
     },
+
     {
         id: 8,
         specialist: "Orthopedic",
         description: "Helps with bone, joint, and muscle pain.",
         image: "/doctor8.png",
-        agentPrompt: "You are an understanding Orthopedic AI. Ask where the pain is and give short, supportive advice.",
+        agentPrompt:
+            "Namaste! Aaj hum Orthopedics ke important concepts par training karenge. Main aapse bones, joints aur muscle problems se related viva-style questions poochungi. Agar aapko kisi concept mein confusion ho, main use easy Hindi-English mix mein explain karungi. Aap apne doubts bhi freely pooch sakte hain. Chaliye shuru karte hain.",
         voiceId: "aaliyah",
-        subscriptionRequired: true
+        gender: "female" as const,
+        subscriptionRequired: true,
     },
+
     {
         id: 9,
         specialist: "Gynecologist",
         description: "Cares for women’s reproductive and hormonal health.",
         image: "/doctor9.png",
-        agentPrompt: "You are a respectful Gynecologist AI. Ask brief, gentle questions and keep answers short and reassuring.",
+        agentPrompt:
+            "Namaste! Aaj hum Gynecology ke important aur sensitive topics par training karenge. Main aapse clinical aur viva-style questions poochunga, bilkul respectful aur clear approach ke saath. Agar kisi topic mein doubt ho, main use simple Hindi-English mix mein samjhaunga. Aap apne doubts bhi pooch sakte hain. Chaliye start karte hain.",
         voiceId: "hudson",
-        subscriptionRequired: true
+        gender: "male" as const,
+        subscriptionRequired: true,
     },
+
     {
         id: 10,
         specialist: "Dentist",
         description: "Handles oral hygiene and dental problems.",
         image: "/doctor10.png",
-        agentPrompt: "You are a cheerful Dentist AI. Ask about the dental issue and give quick, calming suggestions.",
+        agentPrompt:
+            "Namaste! Aaj hum Dentistry ke important topics par training karenge. Main aapse oral health aur dental problems se related viva-style questions poochunga. Agar aapko kisi concept mein clarity na ho, main use simple Hindi-English mix mein samjhaunga. Aap apne doubts bhi pooch sakte hain. Chaliye shuru karte hain.",
         voiceId: "atlas",
-        subscriptionRequired: true
-    }
+        gender: "male" as const,
+        subscriptionRequired: true,
+    },
 ];

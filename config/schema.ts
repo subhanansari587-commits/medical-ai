@@ -15,6 +15,8 @@ export const SessionChatTable = pgTable('sessionChatTable', {
     selectedDoctor: json(),
     conversation: json(),
     report: json(),
+    vapiCallId: varchar(), // Vapi call ID for recording retrieval
+    recordingUrl: text(), // Direct recording URL from Vapi end-of-call-report
     createdBy: varchar().references(() => usersTable.email),
     createdOn: varchar(),
 })

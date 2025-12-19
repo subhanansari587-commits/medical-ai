@@ -12,6 +12,7 @@ import { SessionDetail } from '../medical-agent/[sessionId]/page'
 import { Button } from '@/components/ui/button'
 import moment from 'moment'
 import ViewReportDialog from './ViewReportDialog'
+import { Volume2 } from 'lucide-react'
 
 type Props = {
     historyList: SessionDetail[] // Array of session records to display
@@ -22,11 +23,52 @@ type Props = {
  * 
  * Displays a table listing previous consultation sessions including:
  * - AI Medical Specialist
- * - Notes/Description
  * - Created Date
+ * - Voice Recording Playback
  * - View Report Action
  */
 function HistoryTable({ historyList }: Props) {
+
+    console.log(historyList);
+    /**
+     * Handle playing the voice recording for a session
+     * Fetches the recording URL from Vapi API and plays it
+     */
+    const handlePlayRecording = async (sessionId: string) => {
+        try {
+            // Show loading state (you can add a loading indicator if desired)
+            console.log(`Fetching recording for session: ${sessionId}`);
+
+            // Fetch the recording URL from Vapi API
+            // Using sessionId as callId since Vapi uses the session/call interchangeably
+            const response = await fetch(`/api/vapi-recording?callId=${sessionId}`);
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to fetch recording');
+            }
+
+            const data = await response.json();
+
+            if (!data.recordingUrl) {
+                alert('No recording available for this session');
+                return;
+            }
+
+            // Play the audio recording
+            const audio = new Audio(data.recordingUrl);
+            audio.play().catch(err => {
+                console.error('Error playing audio:', err);
+                alert('Error playing audio. Please try again.');
+            });
+
+            console.log('Playing recording:', data.recordingUrl);
+
+        } catch (error: any) {
+            console.error('Error playing recording:', error);
+            alert(`Error: ${error.message}`);
+        }
+    };
     return (
         <div>
             <Table>
@@ -37,7 +79,6 @@ function HistoryTable({ historyList }: Props) {
                 <TableHeader>
                     <TableRow>
                         <TableHead>AI Medical Specialist</TableHead>
-                        <TableHead>Description</TableHead>
                         <TableHead>Date</TableHead>
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>
@@ -52,17 +93,25 @@ function HistoryTable({ historyList }: Props) {
                                 {record.selectedDoctor.specialist}
                             </TableCell>
 
-                            {/* Session notes or symptoms */}
-                            <TableCell>{record.notes}</TableCell>
-
                             {/* Human-readable timestamp */}
                             <TableCell>
                                 {moment(new Date(record.createdOn)).fromNow()}
                             </TableCell>
 
-                            {/* 🔍 View Report Action */}
+                            {/* 🔍 View Report & Play Recording Actions */}
                             <TableCell className="text-right">
-                                <ViewReportDialog record={record} />
+                                <div className="flex items-center justify-end gap-2">
+                                    {/* 🎵 Play Voice Recording Button */}
+                                    {/* <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => handlePlayRecording(record.sessionId)}
+                                        title="Play voice recording"
+                                    >
+                                        <Volume2 className="h-4 w-4" />
+                                    </Button> */}
+                                    <ViewReportDialog record={record} />
+                                </div>
                             </TableCell>
                         </TableRow>
                     ))}

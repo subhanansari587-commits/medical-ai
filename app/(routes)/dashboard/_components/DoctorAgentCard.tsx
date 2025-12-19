@@ -19,6 +19,7 @@ export type doctorAgent = {
     image: string,
     agentPrompt: string,
     voiceId?: string,
+    gender: "male" | "female",
     subscriptionRequired: boolean
 }
 
@@ -89,7 +90,7 @@ function DoctorAgentCard({ doctorAgent }: props) {
             <Button
                 className='w-full mt-2'
                 onClick={onStartConsultation}
-                disabled={!paidUser && doctorAgent.subscriptionRequired} // disable if doctor is premium & user isn't
+            // disabled={!paidUser && doctorAgent.subscriptionRequired} // disable if doctor is premium & user isn't
             >
                 Start Training{' '}
                 {loading ? (

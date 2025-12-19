@@ -40,6 +40,7 @@ function MedicalVoiceAgent() {
   const [liveTranscript, setLiveTranscript] = useState<string>(""); // Live transcription text
   const [messages, setMessages] = useState<messages[]>([]); // Finalized chat messages log
   const [loading, setLoading] = useState(false); // Loading state for UI feedback
+  const [vapiCallId, setVapiCallId] = useState<string | null>(null); // Vapi call ID for recording retrieval
   const router = useRouter();
   const callActiveRef = useRef(false);
 
@@ -61,6 +62,7 @@ function MedicalVoiceAgent() {
    * using the Vapi SDK and sets up event listeners for call and speech events.
    */
   const StartCall = () => {
+    console.log("Starting call", sessionDetail);
     if (!sessionDetail) return;
     setLoading(true);
 
@@ -72,8 +74,8 @@ function MedicalVoiceAgent() {
     const VapiAgentConfig = {
       name: "AI Medical Trainer Voice Agent",
 
-      firstMessage: `नमस्ते! आज हम "${sessionDetail.notes}" विषय पर ट्रेनिंग करेंगे। 
-    मैं आपसे मेडिकल इंटरव्यू स्टाइल में सवाल पूछूँगा। तैयार हैं?`,
+      // Use the doctor's custom greeting/prompt
+      firstMessage: sessionDetail.selectedDoctor?.agentPrompt || "Hello, how can I help you today?",
 
       transcriber: {
         model: "nova-3",
@@ -83,7 +85,10 @@ function MedicalVoiceAgent() {
 
       voice: {
         model: "eleven_turbo_v2_5",
-        voiceId: "MF4J4IDTRo0AxOO4dpFR",
+        // Select voice based on doctor's gender
+        voiceId: sessionDetail.selectedDoctor?.gender === "male"
+          ? process.env.NEXT_PUBLIC_MALE_VOICE_ID!
+          : process.env.NEXT_PUBLIC_FEMALE_VOICE_ID!,
         provider: "11labs",
         stability: 0.5,
         similarityBoost: 0.75,
@@ -96,31 +101,31 @@ function MedicalVoiceAgent() {
           {
             role: "system",
             content: `
-आप एक अनुभवी मेडिकल ट्रेनर एआई हैं, डॉक्टर नहीं।
+You are an experienced AI ${sessionDetail.selectedDoctor?.specialist || "Medical Trainer"}, not a real doctor.
 
-🔹 ट्रेनिंग का विषय:
+🔹 Training Topic:
 "${sessionDetail.notes}"
 
-यह वही बीमारी / कंडीशन है जिस पर पूरी बातचीत आधारित होगी।
+This is the specific condition/disease that the entire conversation will focus on.
 
-ट्रेनिंग नियम:
-- बातचीत हिंदी में रखें, ज़रूरत हो तो हल्की हिंग्लिश।
-- सीधे पढ़ाना मना है — इंटरव्यू / viva की तरह सवाल पूछें।
-- एक समय में केवल एक सवाल पूछें।
-- लक्षण, कारण, differential diagnosis, red flags और basic management कवर करें।
+Training Rules:
+- Follow the communication style and language from your greeting message.
+- Don't lecture directly — ask questions like in a medical viva/interview.
+- Ask only one question at a time.
+- Cover symptoms, causes, differential diagnosis, red flags, and basic management.
 
-उत्तर मूल्यांकन:
-- सही उत्तर → तारीफ़ करें और थोड़ा बेहतर करके बताएं।
-- गलत उत्तर → शांति से सही उत्तर समझाएं और कारण बताएं।
-- डांटना मना है, सिखाना ज़रूरी है।
+Answer Evaluation:
+- Correct answer → Praise and enhance with additional insights.
+- Incorrect answer → Calmly explain the correct answer with reasoning.
+- Never scold, always teach.
 
-व्यवहार:
-- शिक्षक जैसा लेकिन दोस्ताना।
-- जवाब छोटे, स्पष्ट और सीखने पर केंद्रित।
-- सही जवाब पर प्रोत्साहन ज़रूरी है।
+Behavior:
+- Act as a friendly teacher/mentor.
+- Keep answers short, clear, and learning-focused.
+- Encouragement is essential for correct answers.
 
-लक्ष्य:
-यूज़र को "${sessionDetail.notes}" की ऐसी समझ देना कि वह मेडिकल इंटरव्यू confidently क्लियर कर सके।
+Goal:
+Help the user understand "${sessionDetail.notes}" well enough to confidently clear a medical interview on this topic.
         `,
           },
         ],
@@ -132,22 +137,109 @@ function MedicalVoiceAgent() {
 
     // Event listeners for Vapi voice call lifecycle
 
-    vapi.on("call-start", () => {
+    //@ts-ignore - Vapi SDK passes data to event handlers despite type definitions
+    vapi.on("call-start", async (data: any) => {
       callActiveRef.current = true;
       setLoading(false);
       setCallStarted(true);
-      console.log("Call started");
+      console.log("Call started event received");
+      console.log("Full call-start data:", JSON.stringify(data, null, 2), data);
+
+      // Try to get call ID from the vapi instance itself
+      //@ts-ignore
+      console.log("Vapi instance properties:", Object.keys(vapi));
+      //@ts-ignore
+      console.log("Vapi call:", vapi.call);
+      //@ts-ignore
+      console.log("Vapi callId:", vapi.callId);
+      //@ts-ignore
+      console.log("Vapi _call:", vapi._call);
+      //@ts-ignore
+      console.log("Vapi activeCall:", vapi.activeCall);
+
+      // Try to extract call ID from vapi instance
+      //@ts-ignore
+      const instanceCallId = vapi.call?.callClientId || vapi.call?._callClientId || vapi.call?.id || vapi.callId;
+      console.log("Instance call ID:", instanceCallId, vapi.call);
+
+      if (instanceCallId) {
+        setVapiCallId(instanceCallId);
+        console.log("✅ Call ID found in vapi instance:", instanceCallId);
+
+        try {
+          await axios.post('/api/save-vapi-callid', {
+            sessionId: sessionId,
+            vapiCallId: instanceCallId
+          });
+          console.log("✅ Vapi call ID saved to database");
+        } catch (error) {
+          console.error("❌ Failed to save Vapi call ID:", error);
+        }
+      } else {
+        console.log("⚠️ No call ID found in vapi instance yet, waiting for message events...");
+      }
     });
 
-    vapi.on("call-end", () => {
+    //@ts-ignore - Vapi SDK passes data to event handlers despite type definitions
+    vapi.on("call-end", (data: any) => {
       callActiveRef.current = false;
       setCallStarted(false);
       setVapiInstance(null);
-      console.log("Call ended");
+      console.log("Call ended", data);
+      if (vapiCallId) {
+        console.log("Recording should be available for call ID:", vapiCallId);
+      }
     });
 
     vapi.on("message", (message) => {
       if (!callActiveRef.current) return;
+
+      // Log all messages to debug
+      console.log("Vapi message received:", message);
+
+      // Check for end-of-call-report to get recording URL
+      if (message.type === "end-of-call-report") {
+        console.log("📞 End-of-call-report received:", message);
+        //@ts-ignore
+        const recordingUrl = message.recordingUrl || message.artifact?.recordingUrl || message.stereoRecordingUrl;
+
+        if (recordingUrl) {
+          console.log("✅ Recording URL captured:", recordingUrl);
+          // Save recording URL to database
+          axios.post('/api/save-recording-url', {
+            sessionId: sessionId,
+            recordingUrl: recordingUrl
+          }).then(() => {
+            console.log("✅ Recording URL saved to database");
+          }).catch(error => {
+            console.error("❌ Failed to save recording URL:", error);
+          });
+        } else {
+          console.log("⚠️ No recording URL in end-of-call-report");
+        }
+      }
+
+      // Check for call-start message type to get call ID
+      if (message.type === "call-start") {
+        console.log("Call-start message detected:", message);
+        // Try to extract call ID from various possible locations
+        //@ts-ignore
+        const callId = message.call?.id || message.callId || message.id;
+        if (callId) {
+          setVapiCallId(callId);
+          console.log("✅ Call ID captured from message:", callId);
+
+          // Save the Vapi call ID to the database
+          axios.post('/api/save-vapi-callid', {
+            sessionId: sessionId,
+            vapiCallId: callId
+          }).then(() => {
+            console.log("✅ Vapi call ID saved to database");
+          }).catch(error => {
+            console.error("❌ Failed to save Vapi call ID:", error);
+          });
+        }
+      }
 
       if (message.type === "transcript") {
         const { role, transcriptType, transcript } = message;
@@ -251,9 +343,8 @@ function MedicalVoiceAgent() {
       <div className="flex justify-between items-center">
         <h2 className="p-1 px-2 border rounded-md flex gap-2 items-center">
           <Circle
-            className={`h-4 w-4 rounded-full ${
-              callStarted ? "bg-green-500" : "bg-red-500"
-            }`}
+            className={`h-4 w-4 rounded-full ${callStarted ? "bg-green-500" : "bg-red-500"
+              }`}
           />
           {callStarted ? "Connected..." : "Not Connected"}
         </h2>
