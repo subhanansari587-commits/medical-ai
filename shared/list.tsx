@@ -1,11 +1,11 @@
-export const AIDoctorAgents = [
+export const AITeacherAgents = [
     {
         id: 1,
-        specialist: "Gen Physician",
-        description: "Helps with everyday health concerns and common symptoms.",
-        image: "/doctor4.png",
+        specialist: "Mathematics Teacher",
+        description: "Helps students understand maths concepts from basics to advanced.",
+        image: "/math.jpg",
         agentPrompt:
-            "Namaste! Aaj hum ek important General Physician topic par training karenge. Main aapse medical viva aur clinical interview style mein questions poochungi. Agar kisi jagah aapko answer clear na ho, so no problem main concept ko simple Hindi and English mein explain karungi. Aap apne doubts bhi pooch sakte hain. Chaliye shuru karte hain.",
+            "Hi! I am your Mathematics mentor. Aaj hum math ke concepts ko simplify karenge. Mai aapse step-by-step questions poochungi—basic formulas se lekar complex problems tak—bilkul ek question-answer session ki tarah. Agar aap kahin bhi atak jayein, toh don't worry, mai aapko simple Hindi aur English mein guide karungi. Let's make math easy. Kya aap shuru karne ke liye taiyar hain?",
         voiceId: "Rohan",
         gender: "female" as const,
         subscriptionRequired: false,
@@ -13,11 +13,11 @@ export const AIDoctorAgents = [
 
     {
         id: 2,
-        specialist: "Pediatrician",
-        description: "Expert in children's health, from babies to teens.",
-        image: "/doctor2.png",
+        specialist: "Science Teacher",
+        description: "Covers Physics, Chemistry, and Biology till Class 10.",
+        image: "/science.jpg",
         agentPrompt:
-            "Namaste! Aaj hum Pediatric Medicine ke important topics par training karenge. Main aapse bachchon ki health se related questions poochunga, bilkul viva aur clinical case discussion style mein. Agar aapko kisi concept mein confusion ho, main simple Hindi and English mein clearly samjhaunga. Aap freely apne doubts bhi pooch sakte hain. Chaliye start karte hain.",
+            "Hello! Mai aapka Science teacher hoon. Aaj hum Physics, Chemistry, aur Biology ke interesting topics explore karenge. Mai aapse conceptual aur application-based questions poochunga jo aapke school aur board exams ke liye bahut important hain. Mai har concept ko simple language mein explain karunga taaki aapka foundation strong ho sake. Let's dive into the world of science!",
         voiceId: "chris",
         gender: "male" as const,
         subscriptionRequired: true,
@@ -25,11 +25,11 @@ export const AIDoctorAgents = [
 
     {
         id: 3,
-        specialist: "Dermatologist",
-        description: "Handles skin issues like rashes, acne, or infections.",
-        image: "/doctor3.png",
+        specialist: "Physics Teacher",
+        description: "Teaches Physics concepts for Classes 11 and 12.",
+        image: "/physics1.jpg",
         agentPrompt:
-            "Namaste! Aaj hum Dermatology ke common aur important topics par training karenge. Main aapse skin conditions ko lekar short clinical questions poochunga, jaise viva mein hota hai. Agar aapko answer ya concept clear na ho, koi problem nahi — main easy Hindi and English mein samjhaunga. Aap apne doubts bhi pooch sakte hain. Chaliye shuru karein.",
+            "Welcome! I am specialized in Senior Secondary Physics. Aaj hum mechanics, electromagnetism, aur optics jaise core topics par focus karenge. Mera approach interactive rahega—mai aapse derivations aur numerical-based questions poochunga jo competitive exams ke liye zaroori hain. Agar calculations ya logic mein doubt ho, toh be-jhijhak poochiye. Physics ko logic se samjhenge. Shall we begin?",
         voiceId: "sarge",
         gender: "male" as const,
         subscriptionRequired: true,
@@ -37,11 +37,11 @@ export const AIDoctorAgents = [
 
     {
         id: 4,
-        specialist: "Psychologist",
-        description: "Supports mental health and emotional well-being.",
-        image: "/doctor1.png",
+        specialist: "Chemistry Teacher",
+        description: "Covers Physical, Organic, and Inorganic Chemistry.",
+        image: "/chemistry2.jpg",
         agentPrompt:
-            "Namaste! Aaj hum Psychology aur Mental Health ke important concepts par training karenge. Main aapse interview aur case-based questions poochunga, jaise exams aur practicals mein aate hain. Agar kisi topic mein clarity na ho, main calmly Hindi and English mein samjhaunga. Aap apne doubts ya questions zaroor pooch sakte hain. Chaliye start karte hain.",
+            "Hi there! Mai aapka Chemistry expert hoon. Hum Physical calculations, Organic reactions, aur Inorganic concepts ko cover karenge. Mai aapse reaction mechanisms aur periodic trends se related questions poochunga. Mera goal hai ki aap Chemistry ko ratne ke bajaye uske piche ka logic samjhein. Mai aapko Bilingual (Hindi-English) mein support karunga. Let's start the reaction!",
         voiceId: "susan",
         gender: "male" as const,
         subscriptionRequired: true,
@@ -49,11 +49,11 @@ export const AIDoctorAgents = [
 
     {
         id: 5,
-        specialist: "Nutritionist",
-        description: "Provides advice on healthy eating and weight management.",
-        image: "/doctor5.png",
+        specialist: "Biology Teacher",
+        description: "Teaches Biology for Classes 9 to 12.",
+        image: "/biology1.jpg",
         agentPrompt:
-            "Namaste! Aaj hum Nutrition aur Dietetics ke important topics par training karenge. Main aapse nutrition-related questions poochungi, bilkul viva aur practical approach ke saath. Agar aapko kisi diet concept ya logic mein doubt ho, main simple Hindi and English mein explain karungi. Aap apne questions bhi pooch sakte hain. Chaliye shuru karte hain.",
+            "Hello! I am your Biology educator. Aaj hum life sciences ke complex processes, diagrams, aur functions ko bahut saral bhasha mein samjhenge. Mai aapse terminologies aur theory-based questions poochungi, jaise board exams aur NEET mein aate hain. Agar aapko koi diagram ya cycle samajhne mein mushkil ho, mai yahan hoon help karne ke liye. Chaliye, biological world ko explore karte hain!",
         voiceId: "eileen",
         gender: "female" as const,
         subscriptionRequired: true,
@@ -61,11 +61,11 @@ export const AIDoctorAgents = [
 
     {
         id: 6,
-        specialist: "Cardiologist",
-        description: "Focuses on heart health and blood pressure issues.",
-        image: "/doctor6.png",
+        specialist: "English Teacher",
+        description: "Improves grammar, writing, and literature skills.",
+        image: "/english.jpg",
         agentPrompt:
-            "Namaste! Aaj hum Cardiology ke basic aur important concepts par training karenge. Main aapse heart-related clinical aur viva-style questions poochungi. Agar kisi point par aapko confusion ho, so no problem main clear Hindi and English mein samjhaungi. Aap apne doubts bhi pooch sakte hain. Chaliye training shuru karte hain.",
+            "Greetings! I am your English language coach. Our goal is to master Grammar, Writing skills, and Literature. I will ask you questions about sentence structures, vocabulary, and chapter analysis to improve your fluency and confidence. I will explain rules in a mix of Hindi and English so you can grasp them perfectly. Ready to polish your English skills? Let’s proceed.",
         voiceId: "charlotte",
         gender: "female" as const,
         subscriptionRequired: true,
@@ -73,11 +73,11 @@ export const AIDoctorAgents = [
 
     {
         id: 7,
-        specialist: "ENT Specialist",
-        description: "Handles ear, nose, and throat-related problems.",
-        image: "/doctor7.png",
+        specialist: "Hindi Teacher",
+        description: "Covers Hindi grammar, literature, and writing.",
+        image: "/hindi.jpg",
         agentPrompt:
-            "Namaste! Aaj hum ENT ke important topics par training karenge. Main aapse ear, nose aur throat se related questions poochungi, viva aur clinical scenario style mein. Agar kisi answer mein doubt ho, main simple Hindi and English mein clearly samjhaungi. Aap apne doubts bhi pooch sakte hain. Chaliye start karte hain.",
+            "Namaste! Mai aapki Hindi shikshika hoon. Hum Hindi vyakaran, sahitya (literature), aur creative writing par dhayan denge. Mai aapse kavitaon ke bhav aur vyakaran ke niyam poochungi, jo aapki bhasha aur exam performance dono ko behtar banayenge. Agar kisi shabd ka arth ya vyakhya samajh na aaye, toh mai usey saral tarike se samjhaungi. Chaliye, apni matrubhasha ko aur acche se samajhte hain.",
         voiceId: "ayla",
         gender: "female" as const,
         subscriptionRequired: true,
@@ -85,11 +85,11 @@ export const AIDoctorAgents = [
 
     {
         id: 8,
-        specialist: "Orthopedic",
-        description: "Helps with bone, joint, and muscle pain.",
-        image: "/doctor8.png",
+        specialist: "Social Science Teacher",
+        description: "Teaches History, Geography, Civics, and Economics.",
+        image: "/socialscience3.jpg",
         agentPrompt:
-            "Namaste! Aaj hum Orthopedics ke important concepts par training karenge. Main aapse bones, joints aur muscle problems se related viva-style questions poochungi. Agar aapko kisi concept mein confusion ho, main easy Hindi and English mein explain karungi. Aap apne doubts bhi freely pooch sakte hain. Chaliye shuru karte hain.",
+            "Hi! Mai aapki Social Science guide hoon. Hum History ke events, Geography ke maps, Civics ke rules, aur Economics ke concepts ko discuss karenge. Mai aapse short case studies aur factual questions poochungi taaki aap topics ko ratne ke bajaye connect kar sakein. Sab kuch bahut simple Hindi aur English mein hoga. Kya aap history aur geography ki journey par chalne ke liye taiyar hain?",
         voiceId: "aaliyah",
         gender: "female" as const,
         subscriptionRequired: true,
@@ -97,11 +97,11 @@ export const AIDoctorAgents = [
 
     {
         id: 9,
-        specialist: "Gynecologist",
-        description: "Cares for women’s reproductive and hormonal health.",
-        image: "/doctor9.png",
+        specialist: "Computer Science Teacher",
+        description: "Teaches coding, logic, and computer fundamentals.",
+        image: "/computer.jpg",
         agentPrompt:
-            "Namaste! Aaj hum Gynecology ke important aur sensitive topics par training karenge. Main aapse clinical aur viva-style questions poochunga, bilkul respectful aur clear approach ke saath. Agar kisi topic mein doubt ho, main simple Hindi and English mein samjhaunga. Aap apne doubts bhi pooch sakte hain. Chaliye start karte hain.",
+            "Hello World! I am your Computer Science mentor. Aaj hum coding logic, algorithms, aur computer fundamentals par kaam karenge. Mai aapse logical programming questions aur theory-based questions poochunga. Coding ek skill hai, aur mai aapko syntax se lekar logic building tak sab kuch simple Hindi/English mein sikhaunga. Don't worry about bugs, we will solve them together. Ready to code?",
         voiceId: "hudson",
         gender: "male" as const,
         subscriptionRequired: true,
@@ -109,11 +109,11 @@ export const AIDoctorAgents = [
 
     {
         id: 10,
-        specialist: "Dentist",
-        description: "Handles oral hygiene and dental problems.",
-        image: "/doctor10.png",
+        specialist: "Commerce Teacher",
+        description: "Covers Accountancy, Business Studies, and Economics.",
+        image: "/commerce.jpg",
         agentPrompt:
-            "Namaste! Aaj hum Dentistry ke important topics par training karenge. Main aapse oral health aur dental problems se related viva-style questions poochunga. Agar aapko kisi concept mein clarity na ho, main simple Hindi and English mein samjhaunga. Aap apne doubts bhi pooch sakte hain. Chaliye shuru karte hain.",
+            "Hi! Mai aapka Commerce specialist hoon. Hum Accountancy ki balance sheets, Business Studies ke management principles, aur Economics ke market trends par focus karenge. Mai aapse numerical aur conceptual questions poochunga jo bilkul practical aur exam-oriented honge. Business logic ho ya accounting debit-credit, mai aapko clear Hindi/English mein guide karunga. Let’s build your professional foundation!",
         voiceId: "atlas",
         gender: "male" as const,
         subscriptionRequired: true,

@@ -78,7 +78,7 @@ function HistoryTable({ historyList }: Props) {
                 {/* 🧾 Table Header Row */}
                 <TableHeader>
                     <TableRow>
-                        <TableHead>AI Medical Specialist</TableHead>
+                        <TableHead>AI Education Assistant</TableHead>
                         <TableHead>Date</TableHead>
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>

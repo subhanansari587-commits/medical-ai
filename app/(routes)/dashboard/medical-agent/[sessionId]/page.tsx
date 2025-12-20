@@ -365,7 +365,7 @@ Help the user understand the topic well enough to confidently clear a medical in
           <h2 className="mt-2 text-lg">
             {sessionDetail.selectedDoctor?.specialist}
           </h2>
-          <p className="text-sm text-gray-400">AI Medical Voice Agent</p>
+          <p className="text-sm text-gray-400">AI Education Assistant</p>
 
           {/* Show last 4 finalized messages and live transcript */}
           <div className="mt-12 overflow-y-auto flex flex-col items-center px-10 md:px-28 lg:px-52 xl:px-72">

@@ -25,16 +25,16 @@ function AddNewSessionDialog() {
   const [note, setNote] = useState<string>(); // stores user symptom input
   const [loading, setLoading] = useState(false); // tracks loading state
   const [suggestedDoctors, setSuggestedDoctors] = useState<doctorAgent[]>(); // stores suggested doctors
-  const [selectedDoctor, setSelectedDoctor] = useState<doctorAgent>({
+  const [ selectedDoctor, setSelectedDoctor ] = useState<doctorAgent>( {
     id: 1,
-    specialist: "Gen Physician",
-    description: "Helps with everyday health concerns and common symptoms.",
-    image: "/doctor4.png",
+    specialist: "Study Assistant",
+    description: "Helps students understand subjects, homework, and concepts easily.",
+    image: "/teacher1.png",
     agentPrompt:
-      "आप एक दोस्ताना महिला सामान्य डॉक्टर एआई हैं। यूज़र से आसान हिंदी या हिंग्लिश में बात करें। हमेशा महिला दृष्टिकोण से जवाब दें और 'कर सकती हूँ', 'पूछ सकती हूँ' जैसे शब्दों का इस्तेमाल करें। नम्रता से पूछें कि उन्हें क्या दिक्कत या लक्षण हो रहे हैं। जवाब छोटे, साफ़ और मददगार रखें।",
+      "आप एक दोस्ताना महिला एआई स्टडी असिस्टेंट हैं। आप स्कूल के छात्रों से आसान हिंदी या हिंग्लिश में बात करती हैं। हमेशा महिला दृष्टिकोण से जवाब दें और 'समझा सकती हूँ', 'मदद कर सकती हूँ', 'पूछ सकती हूँ' जैसे शब्दों का इस्तेमाल करें। छात्र से नम्रता से पूछें कि वह किस विषय या टॉपिक में मदद चाहता है। जवाब छोटे, सरल, उदाहरणों के साथ और छात्र-friendly रखें।",
     voiceId: "Rohan",
     subscriptionRequired: false,
-  }); // tracks selected doctor
+  } ); // tracks selected doctor
   const [historyList, setHistoryList] = useState<SessionDetail[]>([]); // stores past session list
 
   const router = useRouter();

@@ -41,7 +41,7 @@ function HistoryList() {
                         height={150}
                     />
                     <h2 className='font-bold text-xl mt-2'>No Recent Consultations</h2>
-                    <p>It looks like you haven't consulted with any doctors yet.</p>
+                    <p>“You haven’t started your learning journey yet. Let’s begin!”</p>
 
                     {/* ➕ Trigger to start a new consultation */}
                     <AddNewSessionDialog />

@@ -1,5 +1,5 @@
 import { openai } from "@/config/OpenAiModel";
-import { AIDoctorAgents } from "@/shared/list";
+import { AITeacherAgents } from "@/shared/list";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -13,22 +13,22 @@ export async function POST(req: NextRequest) {
           content: `
 You are a strict JSON API.
 
-You are given a fixed list of doctors as JSON.
-Your job is to analyze user symptoms and return ONLY the most relevant doctors from that list.
+You are given a fixed list of teachers as JSON.
+Your job is to analyze user symptoms and return ONLY the most relevant teachers from that list.
 
 Rules (non-negotiable):
-- Use ONLY doctors from the provided list.
+- Use ONLY teachers from the provided list.
 - Do NOT modify any field values.
 - Do NOT add or remove fields.
-- Do NOT invent new doctors.
+- Do NOT invent new teachers.
 - Do NOT return explanations, text, or markdown.
 - Do NOT wrap the response in code blocks.
 - Return ONLY a valid JSON array.
-- If multiple doctors are relevant, return multiple objects.
+- If multiple teachers are relevant, return multiple objects.
 - If nothing matches, return an empty array [].
 
 Doctor List:
-${JSON.stringify(AIDoctorAgents)}
+${JSON.stringify( AITeacherAgents )}
 `,
         },
         {

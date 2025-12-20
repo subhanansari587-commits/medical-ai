@@ -297,10 +297,10 @@ const SkeletonFive = () => {
 };
 const items = [
     {
-        title: "AI Medical Transcription",
+        title: "AI Classroom Transcription",
         description: (
             <span className="text-sm">
-                Convert doctor-patient conversations into accurate medical transcripts in real-time.
+                Convert teacher-student conversations into clear and accurate study notes in real time.
             </span>
         ),
         header: <SkeletonOne />,
@@ -308,10 +308,10 @@ const items = [
         icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
     },
     {
-        title: "Clinical Error Detection",
+        title: "Learning Mistake Detection",
         description: (
             <span className="text-sm">
-                AI flags inconsistencies and possible medical errors in transcribed content.
+                AI highlights mistakes and concept gaps in student responses and notes.
             </span>
         ),
         header: <SkeletonTwo />,
@@ -319,10 +319,10 @@ const items = [
         icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
     },
     {
-        title: "Context-Aware Recommendations",
+        title: "Context-Aware Learning Suggestions",
         description: (
             <span className="text-sm">
-                Provide contextual treatment or diagnosis suggestions based on conversations.
+                Get smart topic explanations and practice suggestions based on classroom discussions.
             </span>
         ),
         header: <SkeletonThree />,
@@ -330,10 +330,10 @@ const items = [
         icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
     },
     {
-        title: "Patient Sentiment Monitoring",
+        title: "Student Engagement Monitoring",
         description: (
             <span className="text-sm">
-                Analyze patient tone and emotion to assist doctors with empathetic communication.
+                Analyze student participation and tone to help teachers improve engagement.
             </span>
         ),
         header: <SkeletonFour />,
@@ -341,10 +341,10 @@ const items = [
         icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
     },
     {
-        title: "Summarized Case Notes",
+        title: "Summarized Lesson Notes",
         description: (
             <span className="text-sm">
-                Automatically generate brief, actionable summaries of medical discussions.
+                Automatically generate short, easy-to-revise summaries of classroom lessons.
             </span>
         ),
         header: <SkeletonFive />,

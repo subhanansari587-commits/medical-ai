@@ -21,7 +21,7 @@ export default function Home() {
       </div>
       <div className="px-4 py-10 md:py-20">
         <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-7xl dark:text-slate-300">
-          {"🧠 Transform Healthcare with AI Medical Voice Agents"
+          {"🧠 Empower Schools with AI Learning Voice Assistants"
             .split(" ")
             .map((word, index) => (
               <motion.span
@@ -45,7 +45,7 @@ export default function Home() {
           transition={{ duration: 0.3, delay: 0.8 }}
           className="relative z-10 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
         >
-          Provide 24/7 intelligent medical support using conversational AI. Triage symptoms, book appointments, and deliver empathetic care with voice-first automation.
+          24/7 AI-powered study assistance for students. Clarify concepts, revise subjects, practice exams, and learn confidently with voice-based AI tutors.
         </motion.p>
         <Link href={'/dashboard'}>
           <motion.div
@@ -86,9 +86,9 @@ export default function Home() {
 const Navbar = () => {
   const { user } = useUser();
   return (
-    <nav className="flex w-full items-center justify-between border-t border-b border-neutral-200 px-4 py-4 dark:border-neutral-800">
+    <nav className="flex w-full items-center justify-between border-t border-b border-neutral-200 px-10 py-2 dark:border-neutral-800">
       <div className="flex items-center gap-2">
-        <Image src={'/logo.png'} alt='logo' width={180} height={90} />
+        <Image src={'/school.jpg'} alt='logo' width={120} height={10} />
 
         {/* <div className="size-7 rounded-full bg-gradient-to-br from-violet-500 to-pink-500" />
         <h1 className="text-base font-bold md:text-2xl">MediVoice AI</h1> */}
